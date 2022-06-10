@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        #map {
+            width: 1422px;
+            height: 925px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="data/REALTORS_Association_of_HamiltonBurlingtonpolygon_1.js"></script>
+        <script src="data/HaldimandCountyWards_2.js"></script>
+        <script src="data/CityofHamiltonNeighbourhoods_3.js"></script>
+        <script src="data/CityofBurlingtonNeighbourhoods_4.js"></script>
+        <script src="data/NiagaraNeighbourhoods_5.js"></script>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+            highlightLayer.openPopup();
+        }
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:20, minZoom:1
+        }).fitBounds([[42.60418826590752,-80.43869873586917],[43.62766647868357,-78.86411687005986]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'feet',
+            secondaryLengthUnit: 'miles',
+            primaryAreaUnit: 'sqfeet',
+            secondaryAreaUnit: 'sqmiles'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_OSMStandard_0');
+        map.getPane('pane_OSMStandard_0').style.zIndex = 400;
+        var layer_OSMStandard_0 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            pane: 'pane_OSMStandard_0',
+            opacity: 1.0,
+            attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors, CC-BY-SA</a>',
+            minZoom: 1,
+            maxZoom: 20,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OSMStandard_0;
+        map.addLayer(layer_OSMStandard_0);
+        function pop_REALTORS_Association_of_HamiltonBurlingtonpolygon_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Name</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">descriptio</th>\
+                        <td>' + (feature.properties['descriptio'] !== null ? autolinker.link(feature.properties['descriptio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Neighbourh</th>\
+                        <td>' + (feature.properties['Neighbourh'] !== null ? autolinker.link(feature.properties['Neighbourh'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">REG_SUB_NE</th>\
+                        <td>' + (feature.properties['REG_SUB_NE'] !== null ? autolinker.link(feature.properties['REG_SUB_NE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">RegionNum</th>\
+                        <td>' + (feature.properties['RegionNum'] !== null ? autolinker.link(feature.properties['RegionNum'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Municipali</th>\
+                        <td>' + (feature.properties['Municipali'] !== null ? autolinker.link(feature.properties['Municipali'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Neighbou_1</th>\
+                        <td>' + (feature.properties['Neighbou_1'] !== null ? autolinker.link(feature.properties['Neighbou_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">RegionName</th>\
+                        <td>' + (feature.properties['RegionName'] !== null ? autolinker.link(feature.properties['RegionName'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Municipa_1</th>\
+                        <td>' + (feature.properties['Municipa_1'] !== null ? autolinker.link(feature.properties['Municipa_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_REALTORS_Association_of_HamiltonBurlingtonpolygon_1_0() {
+            return {
+                pane: 'pane_REALTORS_Association_of_HamiltonBurlingtonpolygon_1',
+                opacity: 1,
+                color: 'rgba(67,101,84,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_REALTORS_Association_of_HamiltonBurlingtonpolygon_1');
+        map.getPane('pane_REALTORS_Association_of_HamiltonBurlingtonpolygon_1').style.zIndex = 401;
+        map.getPane('pane_REALTORS_Association_of_HamiltonBurlingtonpolygon_1').style['mix-blend-mode'] = 'normal';
+        var layer_REALTORS_Association_of_HamiltonBurlingtonpolygon_1 = new L.geoJson(json_REALTORS_Association_of_HamiltonBurlingtonpolygon_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_REALTORS_Association_of_HamiltonBurlingtonpolygon_1',
+            layerName: 'layer_REALTORS_Association_of_HamiltonBurlingtonpolygon_1',
+            pane: 'pane_REALTORS_Association_of_HamiltonBurlingtonpolygon_1',
+            onEachFeature: pop_REALTORS_Association_of_HamiltonBurlingtonpolygon_1,
+            style: style_REALTORS_Association_of_HamiltonBurlingtonpolygon_1_0,
+        });
+        bounds_group.addLayer(layer_REALTORS_Association_of_HamiltonBurlingtonpolygon_1);
+        map.addLayer(layer_REALTORS_Association_of_HamiltonBurlingtonpolygon_1);
+        function pop_HaldimandCountyWards_2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">OBJECTID_1</th>\
+                        <td>' + (feature.properties['OBJECTID_1'] !== null ? autolinker.link(feature.properties['OBJECTID_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Ward</th>\
+                        <td>' + (feature.properties['Ward'] !== null ? autolinker.link(feature.properties['Ward'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_HaldimandCountyWards_2_0() {
+            return {
+                pane: 'pane_HaldimandCountyWards_2',
+                opacity: 1,
+                color: 'rgba(142,109,18,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_HaldimandCountyWards_2');
+        map.getPane('pane_HaldimandCountyWards_2').style.zIndex = 402;
+        map.getPane('pane_HaldimandCountyWards_2').style['mix-blend-mode'] = 'normal';
+        var layer_HaldimandCountyWards_2 = new L.geoJson(json_HaldimandCountyWards_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_HaldimandCountyWards_2',
+            layerName: 'layer_HaldimandCountyWards_2',
+            pane: 'pane_HaldimandCountyWards_2',
+            onEachFeature: pop_HaldimandCountyWards_2,
+            style: style_HaldimandCountyWards_2_0,
+        });
+        bounds_group.addLayer(layer_HaldimandCountyWards_2);
+        map.addLayer(layer_HaldimandCountyWards_2);
+        function pop_CityofHamiltonNeighbourhoods_3(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">OBJECTID</th>\
+                        <td>' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">COMMUNITY</th>\
+                        <td>' + (feature.properties['COMMUNITY'] !== null ? autolinker.link(feature.properties['COMMUNITY'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NEIGHBOURH</th>\
+                        <td>' + (feature.properties['NEIGHBOURH'] !== null ? autolinker.link(feature.properties['NEIGHBOURH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PLANNING_U</th>\
+                        <td>' + (feature.properties['PLANNING_U'] !== null ? autolinker.link(feature.properties['PLANNING_U'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PLANNING_D</th>\
+                        <td>' + (feature.properties['PLANNING_D'] !== null ? autolinker.link(feature.properties['PLANNING_D'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_CityofHamiltonNeighbourhoods_3_0() {
+            return {
+                pane: 'pane_CityofHamiltonNeighbourhoods_3',
+                opacity: 1,
+                color: 'rgba(236,94,94,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_CityofHamiltonNeighbourhoods_3');
+        map.getPane('pane_CityofHamiltonNeighbourhoods_3').style.zIndex = 403;
+        map.getPane('pane_CityofHamiltonNeighbourhoods_3').style['mix-blend-mode'] = 'normal';
+        var layer_CityofHamiltonNeighbourhoods_3 = new L.geoJson(json_CityofHamiltonNeighbourhoods_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_CityofHamiltonNeighbourhoods_3',
+            layerName: 'layer_CityofHamiltonNeighbourhoods_3',
+            pane: 'pane_CityofHamiltonNeighbourhoods_3',
+            onEachFeature: pop_CityofHamiltonNeighbourhoods_3,
+            style: style_CityofHamiltonNeighbourhoods_3_0,
+        });
+        bounds_group.addLayer(layer_CityofHamiltonNeighbourhoods_3);
+        map.addLayer(layer_CityofHamiltonNeighbourhoods_3);
+        function pop_CityofBurlingtonNeighbourhoods_4(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">OBJECTID</th>\
+                        <td>' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PLANNING_C</th>\
+                        <td>' + (feature.properties['PLANNING_C'] !== null ? autolinker.link(feature.properties['PLANNING_C'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_CityofBurlingtonNeighbourhoods_4_0() {
+            return {
+                pane: 'pane_CityofBurlingtonNeighbourhoods_4',
+                opacity: 1,
+                color: 'rgba(221,67,200,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_CityofBurlingtonNeighbourhoods_4');
+        map.getPane('pane_CityofBurlingtonNeighbourhoods_4').style.zIndex = 404;
+        map.getPane('pane_CityofBurlingtonNeighbourhoods_4').style['mix-blend-mode'] = 'normal';
+        var layer_CityofBurlingtonNeighbourhoods_4 = new L.geoJson(json_CityofBurlingtonNeighbourhoods_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_CityofBurlingtonNeighbourhoods_4',
+            layerName: 'layer_CityofBurlingtonNeighbourhoods_4',
+            pane: 'pane_CityofBurlingtonNeighbourhoods_4',
+            onEachFeature: pop_CityofBurlingtonNeighbourhoods_4,
+            style: style_CityofBurlingtonNeighbourhoods_4_0,
+        });
+        bounds_group.addLayer(layer_CityofBurlingtonNeighbourhoods_4);
+        map.addLayer(layer_CityofBurlingtonNeighbourhoods_4);
+        function pop_NiagaraNeighbourhoods_5(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">NBH_ID</th>\
+                        <td>' + (feature.properties['NBH_ID'] !== null ? autolinker.link(feature.properties['NBH_ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NBH_NAME</th>\
+                        <td>' + (feature.properties['NBH_NAME'] !== null ? autolinker.link(feature.properties['NBH_NAME'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NBH_MUNICI</th>\
+                        <td>' + (feature.properties['NBH_MUNICI'] !== null ? autolinker.link(feature.properties['NBH_MUNICI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_NiagaraNeighbourhoods_5_0() {
+            return {
+                pane: 'pane_NiagaraNeighbourhoods_5',
+                opacity: 1,
+                color: 'rgba(255,127,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_NiagaraNeighbourhoods_5');
+        map.getPane('pane_NiagaraNeighbourhoods_5').style.zIndex = 405;
+        map.getPane('pane_NiagaraNeighbourhoods_5').style['mix-blend-mode'] = 'normal';
+        var layer_NiagaraNeighbourhoods_5 = new L.geoJson(json_NiagaraNeighbourhoods_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_NiagaraNeighbourhoods_5',
+            layerName: 'layer_NiagaraNeighbourhoods_5',
+            pane: 'pane_NiagaraNeighbourhoods_5',
+            onEachFeature: pop_NiagaraNeighbourhoods_5,
+            style: style_NiagaraNeighbourhoods_5_0,
+        });
+        bounds_group.addLayer(layer_NiagaraNeighbourhoods_5);
+        map.addLayer(layer_NiagaraNeighbourhoods_5);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/NiagaraNeighbourhoods_5.png" /> Niagara - Neighbourhoods': layer_NiagaraNeighbourhoods_5,'<img src="legend/CityofBurlingtonNeighbourhoods_4.png" /> City of Burlington - Neighbourhoods': layer_CityofBurlingtonNeighbourhoods_4,'<img src="legend/CityofHamiltonNeighbourhoods_3.png" /> City of Hamilton - Neighbourhoods': layer_CityofHamiltonNeighbourhoods_3,'<img src="legend/HaldimandCountyWards_2.png" /> Haldimand County - Wards': layer_HaldimandCountyWards_2,'<img src="legend/REALTORS_Association_of_HamiltonBurlingtonpolygon_1.png" /> REALTORS_Association_of_Hamilton-Burlington-polygon': layer_REALTORS_Association_of_HamiltonBurlingtonpolygon_1,"OSM Standard": layer_OSMStandard_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
